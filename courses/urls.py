@@ -1,14 +1,12 @@
 
 from django.urls import path
 from . import views
-#http://127.0.0.1:8000/        => anasayfa
-#http://127.0.0.1:8000/home    => anasayfa
-#http://127.0.0.1:8000/kurslar => kurs listesi
-
 
 urlpatterns =[
-    path('',views.home),
-    path('anasayfa',views.home),
-    path('home',views.home),
-    path('kurslar',views.kurslar),
+    path('',views.kurslar),
+    path('list',views.kurslar),
+    path('<kurs_adi>',views.details),
+    path('category/<int:category_id>',views.getCoursesByCategoryId),
+    path('category/<str:category_name>',views.getCoursesByCategoryName,name='courses_by_category'),
+    
 ]
