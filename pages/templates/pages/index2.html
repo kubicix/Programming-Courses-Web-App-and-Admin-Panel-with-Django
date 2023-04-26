@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Programlama Kursları</title>
+    <style>
+        /* CSS kodlarını burada tanımlayabilirsiniz */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .course {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .course h2 {
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+        .course p {
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+        .course .price {
+            font-weight: bold;
+            color: #009688;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Programlama Kursları</h1>
+        {% for course in courses %}
+            <div class="course">
+                <h2>{{ course.name }}</h2>
+                <p>Eğitmen: {{ course.instructor }}</p>
+                <p class="price">{{ course.price }} TL</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
