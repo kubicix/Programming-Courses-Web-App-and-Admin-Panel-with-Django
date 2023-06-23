@@ -5,11 +5,12 @@ from .models import Course,Category
 class CourseAdmin(admin.ModelAdmin):
     list_display = ("title","isActive","slug")
     list_display_links=("title","slug",)
-    readonly_fields=("slug",)
+    prepopulated_fields={"slug": ("title",),}
     list_filter=("isActive",)
     list_editable=("isActive",)
     search_fields=("title","description")
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    pass
+    list_display = ("name","slug")
+    prepopulated_fields={"slug": ("name",),}
