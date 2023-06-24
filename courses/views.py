@@ -16,6 +16,25 @@ def index(request):
     #         kurslar.append(kurs)
     return render(request,'courses/index.html',{'categories':kategoriler,                    'courses':kurslar})
 
+def search(request):
+    if "q" in request.GET and request.GET["q"]!="":
+        q=request.GET["q"]
+        kurslar=Course.objects.filter(isActive=True,title__contains=q).order_by("date")
+        kategoriler=Category.objects.all()
+    else:
+        return redirect("/kurslar")
+    paginator = Paginator(kurslar,3)
+    page=request.GET.get('page',1)
+    page_obj=paginator.get_page(page)
+    
+    print(paginator.count)
+    print(paginator.num_pages)
+    
+    return render(request,'courses/list.html',{
+        'categories':kategoriler,
+        'page_obj':page_obj,
+    })
+    
 
 def details(request,slug):
     try:
