@@ -8,13 +8,19 @@ from django.core.paginator import Paginator
 
 def index(request):
     # list comprhensions
-    kurslar=Course.objects.filter(isActive=1)
+    kurslar=Course.objects.filter(isActive=1,isHome=1)
     kategoriler=Category.objects.all()
     
     # for kurs in db["courses"]:
     #     if kurs["isActive"]==True:
     #         kurslar.append(kurs)
     return render(request,'courses/index.html',{'categories':kategoriler,                    'courses':kurslar})
+
+def create_course(request):
+    #if request.method=="POST":
+    
+        
+    return render(request,"courses/create-course.html")
 
 def search(request):
     if "q" in request.GET and request.GET["q"]!="":
@@ -23,16 +29,11 @@ def search(request):
         kategoriler=Category.objects.all()
     else:
         return redirect("/kurslar")
-    paginator = Paginator(kurslar,3)
-    page=request.GET.get('page',1)
-    page_obj=paginator.get_page(page)
     
-    print(paginator.count)
-    print(paginator.num_pages)
     
-    return render(request,'courses/list.html',{
+    return render(request,'courses/search.html',{
         'categories':kategoriler,
-        'page_obj':page_obj,
+        'courses':kurslar,
     })
     
 
@@ -58,7 +59,7 @@ def getCoursesByCategory(request,slug):
     print(paginator.count)
     print(paginator.num_pages)
     
-    return render(request,'courses/index.html',{
+    return render(request,'courses/list.html',{
         'categories':kategoriler,
         'page_obj':page_obj,
         'seciliKategori':slug
