@@ -17,10 +17,30 @@ def index(request):
     return render(request,'courses/index.html',{'categories':kategoriler,                    'courses':kurslar})
 
 def create_course(request):
-    #if request.method=="POST":
-    
+    if request.method=="POST":
+        title=request.POST["title"]
+        description=request.POST["description"]
+        imageUrl=request.POST["imageUrl"]
+        slug=request.POST["slug"]
+        isActive=request.POST.get("isActive",False)
+        isHome=request.POST.get("isHome",False)
+        if isActive=="on":
+            isActive=True
+        else:
+            isActive=False
+            
+        if isHome=="on":
+            isHome=True
+        else:
+            isHome=False
+            
         
+        kurs=Course(title=title,description=description,slug=slug,isActive=isActive,isHome=isHome,imageUrl=imageUrl)
+        kurs.save()
+        return redirect("/kurslar")
     return render(request,"courses/create-course.html")
+
+
 
 def search(request):
     if "q" in request.GET and request.GET["q"]!="":
@@ -55,9 +75,6 @@ def getCoursesByCategory(request,slug):
     paginator = Paginator(kurslar,3)
     page=request.GET.get('page',1)
     page_obj=paginator.get_page(page)
-    
-    print(paginator.count)
-    print(paginator.num_pages)
     
     return render(request,'courses/list.html',{
         'categories':kategoriler,

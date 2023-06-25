@@ -15,6 +15,7 @@
     <div class="row">
       <div class="col-12">
         <form action="{% url 'create_course' %}" method="POST">
+            {% csrf_token %}
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
                 <input type="text" name="title" class="form-control">
@@ -25,7 +26,7 @@
             </div>
             <div class="mb-3">
                 <label for="imageUrl" class="form-label">imageUrl</label>
-                <input type="text" name="imageUrl">
+                <input type="text" name="imageUrl" class="form-control">
             </div>
             <div class="mb-3">
                 <label for="slug" class="form-label">slug</label>
