@@ -6,7 +6,10 @@
           <a href="{% url 'index' %}"  class="nav-link">Kurslar</a>
         </li>
         <li class="nav-item">
-          <a href="{% url 'create_course' %}" class="nav-link">Kurs Ekle</a>
+          <a href="{% url 'create_course' %}" class="nav-link">Admin Kurs Ekle</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'course_list' %}" class="nav-link">Admin Kurs Listesi</a>
         </li>
       </ul>
       <form class="d-flex" action="{% url 'search' %}">

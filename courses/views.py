@@ -23,15 +23,21 @@ def create_course(request):
         form=CourseCreateForm(request.POST)
         
         if form.is_valid():
-            kurs=Course(title=form.cleaned_data["title"],description=form.cleaned_data["description"],imageUrl=form.cleaned_data["imageUrl"],slug=form.cleaned_data["slug"])
-            kurs.save()
+            form.save()
             return redirect("/kurslar")
     else:
         form=CourseCreateForm()
             
     return render(request,"courses/create-course.html",{"form":form})
 
-
+def course_list(request):
+    kurslar=Course.objects.all()
+    return render(request,'courses/course-list.html',{
+        "courses":kurslar
+    })
+    
+def course_edit(request,id):
+    pass
 
 def search(request):
     if "q" in request.GET and request.GET["q"]!="":
