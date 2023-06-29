@@ -1,4 +1,4 @@
-# Programming Courses Blog 
+# Programming Courses Web Application
 
 This repository contains the source code of my Django-based web application that aims to deliver a platform for programming courses. The website has a functional login page, admin panel, and is built using the Django Framework.
 
