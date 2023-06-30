@@ -38,6 +38,8 @@
                 <td>
                   
                   <a href="{% url 'course_edit' course.id %}" class="btn btn-primary btn-sm">Güncelle</a>
+                  <a href="{% url 'course_delete' course.id %}" class="btn btn-danger btn-md" type="button">Sil</a>
+                  
                 </td>
               </tr>
             {% endfor %}
