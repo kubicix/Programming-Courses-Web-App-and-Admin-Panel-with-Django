@@ -1,4 +1,6 @@
 from datetime import date,datetime
+import os
+import random
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http import Http404, HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 
@@ -57,6 +59,23 @@ def course_delete(request,id):
         return redirect("course_list")
     
     return render(request,"courses/course-delete.html",{"course":course})
+
+def upload(request):
+    if request.method=="POST":
+        uploaded_images=request.FILES.getlist("images")
+        for file in uploaded_images:
+            handle_uploaded_files(file)
+        return render(request,"courses/success.html")
+    return render(request,"courses/upload.html")
+
+def handle_uploaded_files(file):
+    number=random.randint(1,9999)
+    filename,file_extention=os.path.splitext(file.name)
+    name=filename+"_"+str(number)+file_extention
+    #filename _ 1112.jpg
+    with open("temp/"+name,"wb+") as destination:
+        for chunk in file.chunks():
+            destination.write(chunk)
 
 def search(request):
     if "q" in request.GET and request.GET["q"]!="":
