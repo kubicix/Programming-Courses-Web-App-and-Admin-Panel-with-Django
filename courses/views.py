@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.http import Http404, HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 
 from courses.forms import CourseCreateForm, CourseEditForm, UploadForm
-from .models import Course,Category
+from .models import Course,Category, UploadModel
 from django.core.paginator import Paginator
 
 
@@ -65,21 +65,14 @@ def upload(request):
         form=UploadForm(request.POST,request.FILES)
         
         if form.is_valid():
-            uploaded_image=request.FILES["image"]
-            handle_uploaded_files(uploaded_image)
+            model = UploadModel(image=request.FILES["image"])
+            model.save()
             return render(request,"courses/success.html")
     else:
         form=UploadForm()
     return render(request,"courses/upload.html",{"form":form})
 
-def handle_uploaded_files(file):
-    number=random.randint(1,9999)
-    filename,file_extention=os.path.splitext(file.name)
-    name=filename+"_"+str(number)+file_extention
-    #filename _ 1112.jpg
-    with open("temp/"+name,"wb+") as destination:
-        for chunk in file.chunks():
-            destination.write(chunk)
+
 
 def search(request):
     if "q" in request.GET and request.GET["q"]!="":
