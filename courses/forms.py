@@ -13,7 +13,7 @@ class CourseCreateForm(forms.ModelForm):
     """A form for creating a new course."""
     class Meta:
         model=Course
-        fields=('title','description','imageUrl','slug')
+        fields=('title','description','image','slug')
         labels={
             "title":"Kurs Başlığı",
             "description":"Açıklama"
@@ -21,7 +21,6 @@ class CourseCreateForm(forms.ModelForm):
         widgets={
             "title":TextInput(attrs={"class":"form-control"}),
             "description":Textarea(attrs={"class":"form-control"}),
-            "imageUrl":TextInput(attrs={"class":"form-control"}),
             "slug":TextInput(attrs={"class":"form-control"})
         }
         error_messages={
@@ -38,7 +37,7 @@ class CourseEditForm(forms.ModelForm):
     """A form for creating a new course."""
     class Meta:
         model=Course
-        fields=('title','description','imageUrl','slug',"categories","isActive")
+        fields=('title','description','image','slug',"categories","isActive")
         labels={
             "title":"Kurs Başlığı",
             "description":"Açıklama"
@@ -46,7 +45,6 @@ class CourseEditForm(forms.ModelForm):
         widgets={
             "title":TextInput(attrs={"class":"form-control"}),
             "description":Textarea(attrs={"class":"form-control"}),
-            "imageUrl":TextInput(attrs={"class":"form-control"}),
             "slug":TextInput(attrs={"class":"form-control"}),
             "categories":SelectMultiple(attrs={"class":"form-control"})
         }
