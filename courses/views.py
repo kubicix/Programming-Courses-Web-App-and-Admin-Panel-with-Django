@@ -3,7 +3,7 @@ import os
 import random
 from django.shortcuts import get_object_or_404, redirect, render 
 from django.http import Http404, HttpResponse, HttpResponseNotFound, HttpResponseRedirect
-
+from django.contrib.auth.decorators import login_required,user_passes_test
 from courses.forms import CourseCreateForm, CourseEditForm, UploadForm
 from .models import Course,Category, UploadModel
 from django.core.paginator import Paginator
@@ -20,6 +20,10 @@ def index(request):
     #         kurslar.append(kurs)
     return render(request,'courses/index.html',{'categories':kategoriler,                    'courses':kurslar})
 
+def isAdmin(user):
+    return user.is_superuser
+
+@user_passes_test(isAdmin)
 def create_course(request):
     if not request.user.is_superuser:
         return redirect("index")
@@ -35,6 +39,7 @@ def create_course(request):
             
     return render(request,"courses/create-course.html",{"form":form})
 
+@login_required()
 def course_list(request):
     kurslar=Course.objects.all()
     return render(request,'courses/course-list.html',{
