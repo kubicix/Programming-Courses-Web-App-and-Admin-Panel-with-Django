@@ -21,6 +21,9 @@ def index(request):
     return render(request,'courses/index.html',{'categories':kategoriler,                    'courses':kurslar})
 
 def create_course(request):
+    if not request.user.is_superuser:
+        return redirect("index")
+        
     if request.method=="POST":
         form=CourseCreateForm(request.POST,request.FILES)
         
