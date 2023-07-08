@@ -24,6 +24,7 @@ def user_login(request):
         else:
             messages.add_message(request,messages.ERROR,"Hatalı kullanıcı adı veya parola.")
             return render(request,"account/login.html")
+        #messages
     else:
         return render(request,"account/login.html")
     
