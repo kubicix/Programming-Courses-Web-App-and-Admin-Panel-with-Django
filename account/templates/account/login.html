@@ -2,37 +2,35 @@
 
 {% load static %}
 
-{% block title %}
-  
-{% endblock title %}
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'courses/css/style.css' %}">
+{% endblock %}
 
-{% block css %}
-  <link rel="stylesheet" href="{% static 'courses/css/style.css' %}">
-{% endblock css %}
+{% block page_title %}
+{% endblock %}
 
 {% block content %}
-<div class="container mt-3">
-    <div class="row">
-      <div class="col-12">
-        <h1>Login</h1>
-        <hr>
-        <form method="post">
-            {% csrf_token %}
-            
-            
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" name="username" id="username" class="form-control" required>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-12">
+              <h1>Login</h1>
+              <hr>
+              
+              <form method="post" novalidate>
+                {% csrf_token %}
+
+                {% include 'partials/_form.html' %}
+
+                <button type="submit" class="btn btn-primary">Login</button>
+              </form>
+
 
             </div>
-            <div class="mb-3">
-                <label for="passowrd" class="form-label">Password</label>
-                <input type="password" name="password" id="password" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
-        
-      </div>
+        </div>
     </div>
-  </div>
-{% endblock content %}
+{% endblock %}
+
+
+{% block js_files %}
+    <script src="{% static 'courses/js/script.js' %}"></script>
+{% endblock %}
