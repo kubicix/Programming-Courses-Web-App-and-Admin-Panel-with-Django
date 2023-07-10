@@ -7,7 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 
 def user_login(request):
     if request.user.is_authenticated and "next" in request.GET:
-        return render(request,"account/login.html",{"error":"Yetkiniz yok."})
+        return render(request,"account/login.html",{"error":"Yetkiniz yok"})
     if request.method=="POST":
         form = AuthenticationForm(request,data=request.POST)
         if form.is_valid():  
