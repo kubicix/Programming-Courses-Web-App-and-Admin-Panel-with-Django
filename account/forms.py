@@ -1,8 +1,9 @@
 from django import forms
 from django.contrib.auth.base_user import AbstractBaseUser
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 from django.forms import widgets
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 class LoginUserForm(AuthenticationForm):
     def __init__(self,*args,**kwargs):
@@ -18,5 +19,12 @@ class LoginUserForm(AuthenticationForm):
             
         return username
     
+class NewUserForm(UserCreationForm):
+    class Meta:
+        model=User
+        fields = ("username","email",)
     
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        self.fields()
             
