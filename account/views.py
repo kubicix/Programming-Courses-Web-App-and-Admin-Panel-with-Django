@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 
-from account.forms import LoginUserForm, NewUserForm
+from account.forms import LoginUserForm, NewUserForm, UserPasswordChangeForm
 from django.contrib.auth.forms import UserCreationForm,PasswordChangeForm
 # Create your views here.
 
@@ -60,15 +60,15 @@ def user_register(request):
 
 def change_password(request):
     if request.method=="POST":
-        form = PasswordChangeForm(request.user,request.POST)
+        form = UserPasswordChangeForm(request.user,request.POST)
         if form.is_valid():
             user=form.save()
-            update_session_auth_hash(user)
+            update_session_auth_hash(request,user)
             messages.success(request,"Password Changed")
             return redirect("change_password")
         else:
             return render(request,"account/change-password.html",{"form":form})
-    form = PasswordChangeForm(request.user)
+    form = UserPasswordChangeForm(request.user)
     return render(request,"account/change-password.html",{"form":form})
 
 def user_logout(request):

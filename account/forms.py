@@ -4,6 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 from django.forms import widgets
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm,PasswordChangeForm
 
 class LoginUserForm(AuthenticationForm):
     def __init__(self,*args,**kwargs):
@@ -43,5 +44,18 @@ class NewUserForm(UserCreationForm):
             self.add_error("email","Mail already exists in the database.")
         
         return email
+    
+class UserPasswordChangeForm(PasswordChangeForm):
+   
+    
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        self.fields["old_password"].widget=widgets.PasswordInput(attrs={"class":"form-control"})
+        self.fields["new_password1"].widget=widgets.PasswordInput(attrs={"class":"form-control"})
+        self.fields["new_password2"].widget=widgets.PasswordInput(attrs={"class":"form-control"})
         
+        
+  
+        
+    
             
