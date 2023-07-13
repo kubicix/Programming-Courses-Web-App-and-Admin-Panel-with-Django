@@ -29,6 +29,9 @@
               <a href="#" class="nav-link">Hoş Geldin, {{user.username}}</a>
             </li>
             <li class="nav-item">
+              <a href="{% url 'change_password' %}" class="nav-link">Change Password</a>
+            </li>
+            <li class="nav-item">
               <a href="{% url 'user_logout' %}" class="nav-link">Logout</a>
             </li>
           {% else %}
