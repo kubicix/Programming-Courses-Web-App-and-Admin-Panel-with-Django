@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.http import Http404, HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required,user_passes_test
 from courses.forms import CourseCreateForm, CourseEditForm, UploadForm
-from .models import Course,Category, UploadModel
+from .models import Course,Category, Slider, UploadModel
 from django.core.paginator import Paginator
 
 
@@ -14,11 +14,13 @@ def index(request):
     # list comprhensions
     kurslar=Course.objects.filter(isActive=1,isHome=1)
     kategoriler=Category.objects.all()
+    sliders = Slider.objects.filter(is_active=True)
     
     # for kurs in db["courses"]:
     #     if kurs["isActive"]==True:
     #         kurslar.append(kurs)
-    return render(request,'courses/index.html',{'categories':kategoriler,                    'courses':kurslar})
+    return render(request,'courses/index.html',{'categories':kategoriler,                    'courses':kurslar,
+    'sliders':sliders})
 
 def isAdmin(user):
     return user.is_superuser
