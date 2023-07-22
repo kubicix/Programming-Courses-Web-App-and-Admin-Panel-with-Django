@@ -26,7 +26,7 @@ This repository contains the source code of my Django-based web application that
 - Login with your admin credentials.
 - Manage users, courses, and site content from the admin panel.
 
-
+### Screenshots 
 ![eg1](https://github.com/kubicix/Programming-Courses-Web-App-with-Django/assets/96316375/d2d2d448-68c0-4bbc-8b83-4ee1a1b20b0d)
 ![eg2](https://github.com/kubicix/Programming-Courses-Web-App-with-Django/assets/96316375/0f07e8ca-9573-4cbb-af20-904ee9d6a621)
 ![eg3](https://github.com/kubicix/Programming-Courses-Web-App-with-Django/assets/96316375/6ca7cf3f-1e6f-44fc-967e-aab1899813bb)
